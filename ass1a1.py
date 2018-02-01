@@ -1,0 +1,12 @@
+import re
+p = re.compile("(\')([^']*?[.,?!;:])(\')",flags=re.DOTALL)
+f = open('test.txt', 'r')
+text = f.read()
+f.close()
+text2 = re.sub('(\w)(\')(\w)',r'\1@@\3',text)
+text3 = p.sub(r'"\2"',text2)
+strings = re.sub('@@','\'',text3)
+print (strings)
+f = open('test2.txt','w')
+f.write(strings)
+f.close()
